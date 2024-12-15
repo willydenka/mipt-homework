@@ -5,7 +5,7 @@ import java.util.Stack;
 public class Summator {
     private static Stack<Double> numbers = new Stack<>(); // Создаем стэк для чисел
     private static Stack<Character> operators = new Stack<>(); // Создаем стэк для операторов
-    // Почему стэк, потому что работает по принципу последним пришел, последним вышел
+    // Почему стэк, потому что работает по принципу последним пришел, первым вышел
     // Поможет записать числа в правильном порядке
 
     // Главный метод
