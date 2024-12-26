@@ -1,4 +1,5 @@
-package hw.until24thDecember;
+package hw.oop;
+
 /*
 Создайте сущность Линия, расположенную на двумерной плоскости, которая описывается:
 •	Координата начала: Точка
@@ -26,8 +27,7 @@ public class Line {
     }
 
     public Line(int x1, int y1, int x2, int y2) {
-        startPoint = new Point(x1, y1);
-        endPoint = new Point(x2, y2);
+        this(new Point(x1, y2), new Point(x2, y2));
     }
 
     @Override

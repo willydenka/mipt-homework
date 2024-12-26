@@ -1,4 +1,4 @@
-package hw.until24thDecember;
+package hw.oop;
 
 import java.util.Arrays;
 

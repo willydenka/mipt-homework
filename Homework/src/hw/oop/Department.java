@@ -1,4 +1,4 @@
-package hw.until24thDecember;
+package hw.oop;
 
 import java.util.Arrays;
 
@@ -9,6 +9,7 @@ public class Department {
 
     @Override
     public String toString() {
+
         return "Отдел " + name + ", список сотрудников: " + Arrays.toString(employees);
     }
 }

@@ -1,4 +1,4 @@
-package hw.until24thDecember;
+package hw.oop;
 /*
 Создайте сущность Человек, которая описывается:
 •	Имя: строка

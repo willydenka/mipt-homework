@@ -1,4 +1,4 @@
-package hw.until10thDecember;
+package hw.oop;
 
 import java.util.Scanner;
 

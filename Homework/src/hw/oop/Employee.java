@@ -1,4 +1,5 @@
-package hw.until24thDecember;
+package hw.oop;
+
 /*
 Создайте сущность Сотрудник, которая описывается:
 •	Имя: строка

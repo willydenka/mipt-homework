@@ -1,6 +1,4 @@
-package hw.until17thDecember;
-
-import java.util.Arrays;
+package hw.oop;
 
 public class Block5 {
 
@@ -141,7 +139,7 @@ public class Block5 {
     массив arr.
      */
     public static int[] findAll(int[] arr, int x) {
-        java.lang.StringBuilder nums = new StringBuilder();
+        StringBuilder nums = new StringBuilder();
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] == x)
                 nums.append(i);
@@ -163,7 +161,7 @@ public class Block5 {
     отрицательных.
      */
     public static int[] deleteNegative(int[] arr) {
-        java.lang.StringBuilder positive = new StringBuilder();
+        StringBuilder positive = new StringBuilder();
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] >= 0)
                 positive.append(arr[i]);

@@ -1,7 +1,6 @@
-package hw.until24thDecember;
+package hw.oop;
 
 import java.util.Arrays;
-import java.util.concurrent.CyclicBarrier;
 
 public class Main {
     public static void main(String[] args) {
@@ -399,5 +398,7 @@ public class Main {
         System.out.println(studentVasa);
         System.out.println(studentMax);
         System.out.println("------------");
+
+
     }
 }
