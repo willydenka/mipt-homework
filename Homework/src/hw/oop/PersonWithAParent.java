@@ -18,40 +18,86 @@ package hw.oop;
 3.	Вывести на экран строковое представление всех троих людей.
  */
 public class PersonWithAParent {
-    Name name;
-    PersonWithAParent father;
+    private final Name name;
+    private PersonWithAParent father;
 
-    public PersonWithAParent(){}
+
 
     // 1.4.6
     // Реализуйте описанные способы создания Человека таким образом,
     // чтобы операции присвоения использовались только в одном из конструкторов.
-    public PersonWithAParent(String personalName){ // 1.4.6
+    public PersonWithAParent(String personalName) { // 1.4.6
         this.name = new Name(personalName);
     }
 
-    public PersonWithAParent(Name name){ // 1.4.6
+    public PersonWithAParent(Name name) {// 1.4.6
         this.name = name;
     }
 
-    public PersonWithAParent(PersonWithAParent father, String personalName){ // 1.4.6
+    public PersonWithAParent(PersonWithAParent father, String personalName) { // 1.4.6
         this.father = father;
         this.name = new Name(personalName);
     }
 
-    public PersonWithAParent(PersonWithAParent father, Name name){ // 1.4.6
+    public PersonWithAParent(PersonWithAParent father, Name name) { // 1.4.6
         this.father = father;
         this.name = name;
     }
 
+
+    // 1.6.7
+    public PersonWithAParent getFather() {
+        if (father == null)
+            throw new IllegalArgumentException("Отец не указан");
+        // Создал копию поля отец у объекта
+        if (father.father == null)
+            return new PersonWithAParent(father.name);
+        else return new PersonWithAParent(father.father, father.name);
+    }
+
+    // 1.6.7 - поле name final, поэтому можно безопасно его возвращать
+    public Name getName() {
+        return name;
+    }
+
+
+
+    // 1.5.4
+    public String getPersonalName() {
+        String personalName = name.personalName; // По конструкторам предполагается, что без имени нельзя создать объект
+        if (personalName.isEmpty()) // поэтому npe не вылетит, когда стучимся в name
+            throw new IllegalArgumentException("Личное имя не указано");
+        return personalName;
+    }
+    // 1.5.4
+    public String getPatronymic() {
+        String patronymic = name.patronymic;
+        if (patronymic.isEmpty())
+            throw new IllegalArgumentException("Отчество не указано");
+        return patronymic;
+    }
+    // 1.5.4
+    public String getSurname() {
+        String surname = name.surname;
+        PersonWithAParent fatherCopy = father;
+        while (surname == null) {
+            if (fatherCopy != null) {
+                if (fatherCopy.name.surname == null)
+                    fatherCopy = fatherCopy.father;
+                else surname = fatherCopy.name.surname;
+            } else throw new IllegalArgumentException("Нет фамилии у родни или про нее ничего неизвестно");
+        }
+        return surname;
+    }
+
+    // Переделал метод под 1.5.4
     @Override
     public String toString() {
-            if (name.surname == null && father != null &&  father.name.surname != null)
-                return father.name.surname + " " + name;
-
-            if (name.patronymic == null && father != null && father.name.personalName != null)
-                return name + " " + father.name.personalName + "ович";
-
-            return name.toString();
+        if (name.patronymic == null && father != null && father.getPersonalName() != null)
+            return getSurname() +  " " +  this.getPersonalName() + " " + father.getPersonalName() + "ович";
+        return getSurname() +  " " + getPersonalName();
     }
 }
+
+
+

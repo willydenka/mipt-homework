@@ -14,14 +14,14 @@ package hw.oop;
  */
 public class Name {
     String surname;
-    String personalName;
+    final String personalName;
     String patronymic;
 
-    public Name() {}
 
-
-    // 1.4.5
+    // 1.4.5 + 1.6.2
     public Name(String personalName) {
+        if (personalName == null || personalName.isEmpty())
+            throw new IllegalArgumentException("Имя не должно быть пустым");
         this.personalName = personalName;
     }
 

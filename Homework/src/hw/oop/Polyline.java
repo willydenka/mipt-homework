@@ -1,5 +1,6 @@
 package hw.oop;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /*
@@ -15,18 +16,33 @@ import java.util.Arrays;
 3.	Сдвиньте начало первой Ломаной таким образом, чтобы одновременно сдвинулось начало второй Ломаной.
  */
 public class Polyline {
-    Point[] points;
+    ArrayList<Point> points;
 
-    public Polyline() {}
 
     // 1.4.3
-    public Polyline(Point[] points) {
-        this.points = points;
+    public Polyline(Point... points) {
+        this.points = new ArrayList<>();
+        this.points.addAll(Arrays.asList(points));
     }
 
+    // 1.5.7
+    public void addPoints(Point... points) {
+        this.points.addAll(Arrays.asList(points));
+    }
 
+    // 1.5.7
+    public double getLength() {
+        double res = 0;
+        for (int i = 0; i < points.size()-1; i++) {
+            Point startPoint = points.get(i); // Берем первую точку
+            Point endPoint = points.get(i+1); // Берем вторую точку
+            res = res + Math.sqrt(Math.pow(endPoint.x - startPoint.x, 2) + Math.pow(endPoint.y - startPoint.y, 2)); // Считаем длину линии
+        } // И фиксируем длину первой линии, так делаем с каждой линией и суммируем их
+        return res;
+    }
     @Override
     public String toString() {
-        return "Линия " + Arrays.toString(points);
+        return "Линия " + points;
     }
 }
+

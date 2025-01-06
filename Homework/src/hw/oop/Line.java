@@ -15,19 +15,40 @@ package hw.oop;
 5.	Измените координаты первой линии так, чтобы при этом не изменились, координаты третьей линии.
  */
 public class Line {
-    Point startPoint;
-    Point endPoint;
+    private Point startPoint;
+    private Point endPoint;
 
-    public Line() {}
-
-    // 1.4.2
+    // 1.4.2 + 1.6.6 Две любые линии не могут ссылаться на один и тот же объект точки
     public Line(Point startPoint, Point endPoint) {
-        this.startPoint = startPoint;
-        this.endPoint = endPoint;
+        this.startPoint = new Point(startPoint.x, startPoint.y);
+        this.endPoint = new Point(endPoint.x, endPoint.y);
     }
 
     public Line(int x1, int y1, int x2, int y2) {
         this(new Point(x1, y2), new Point(x2, y2));
+    }
+
+    public Point getStartPoint() {
+        return new Point(startPoint.x, startPoint.y);
+    }
+
+    public void setStartPoint(Point startPoint) {
+        this.startPoint = new Point(startPoint.x, startPoint.y);
+    }
+
+    public Point getEndPoint() {
+        return new Point(endPoint.x, endPoint.y);
+    }
+
+    public void setEndPoint(Point endPoint) {
+        this.endPoint = new Point(endPoint.x, endPoint.y);
+    }
+
+    // 1.5.3
+    public double getLength() {
+        double res;
+        res = Math.sqrt(Math.pow(endPoint.x - startPoint.x, 2) + Math.pow(endPoint.y - startPoint.y, 2));
+        return res;
     }
 
     @Override

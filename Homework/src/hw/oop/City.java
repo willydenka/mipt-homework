@@ -1,6 +1,7 @@
 package hw.oop;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+
 
 /*
 Создайте сущность Город, которая будет представлять собой точку на карте со следующими характеристиками:
@@ -12,24 +13,53 @@ import java.util.Arrays;
  */
 public class City {
     String name;
-    Way[] ways;
+    private final ArrayList<Way> ways;
 
-
-    public City() {}
-
-    // 1.4.8
-    public City(String name, Way[] ways) {
-        this(name);
-        this.ways = ways;
-    }
 
     public City(String name) {
         this.name = name;
+        this.ways = new ArrayList<>();
+    }
+
+    // 1.4.8 + 1.6.9
+    public City(String name, Way... ways) { //
+        this(name);
+        for (Way w : ways)
+            setWaysFromArray(w); // 1.6.9
+    }
+
+    public void addWay(Way... ways) {
+        for (Way w : ways)
+            setWaysFromArray(w); // // 1.6.9
+    }
+
+    // 1.6.9
+    private void setWaysFromArray(Way way) {
+        if (this.ways.isEmpty()) // Если путей у города нет, сразу закидываем
+            this.ways.add(way);
+        else {
+            for (Way w : this.ways) { // Проверяем, не ведет ли переданный путь к городу, к которому у нас уже есть путь
+                if (w.getCity().equals(way.getCity())) { // Если ведет, то
+                    w.setPrice(way.getPrice()); // Обновляем стоимость
+                    return; // Выходим из метода
+                }
+            }
+            this.ways.add(way); // Если пути в такой город нет, то просто добавляем его
+        }
+    }
+
+    public void deleteWay(Way way) {
+        if (!this.ways.contains(way))
+            throw new IllegalArgumentException("Такой дороги нет");
+        this.ways.remove(way);
     }
 
     @Override
     public String toString() {
         if (ways == null) return name;
-        return "Город " + name + ", связанные города: " + Arrays.toString(ways);
+        return "Город " + name + ", связанные города: " + ways;
     }
 }
+
+
+

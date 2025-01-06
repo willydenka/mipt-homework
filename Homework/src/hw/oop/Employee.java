@@ -16,21 +16,40 @@ package hw.oop;
 (у всех троих должен оказаться один и тот же отдел и начальник).
  */
 public class Employee {
-    String name;
-    Department department;
+    private final String name;
+    private Department department;
 
+    public Employee(String name) {
+        this(name, null);
+    }
+    public Employee(String name, Department department) {
+        this.name = name;
+        this.department = department;
+        if (department != null && !department.getEmployees().contains(this))
+            department.addEmployee(this);
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+        if (!department.getEmployees().contains(this))
+            department.addEmployee(this);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
 
     @Override
     public String toString() {
-        if (department != null) {
-            if (this == department.chief) {
-                return name + " начальник отдела " + (department.name != null ? department.name : "без названия");
-            } else {
-                String chief = department.chief != null ? department.chief.name : "неизвестен";
-                return name + " работает в отделе " + (department.name != null ? department.name : "без названия")
-                        + ", начальник которого " + chief;
-            }
-        }
-        return name + " не имеет отдела";
+        if (department == null)
+            return name + " не работает";
+        if (this == department.getChief())
+            return name + ", начальник отдела " + department.getName();
+        return name + ", " + department;
     }
 }
+

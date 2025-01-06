@@ -8,14 +8,12 @@ package hw.oop;
  Создать и вывести на экран дома с 1, 5, 23 этажами.
  */
 public class House {
-    int numberOfFloors; // final для невозможности изменять поле после инициализации
-    // Не пишу, так как вылетят ошибки из мейна за прошлые задачи с этим объектом
+   private final int numberOfFloors;
 
-    public House() {}
-
-    // 1.4.4 Убирать пустой конструктор не буду, вылетят ошибки в мейне. Представим, что его нет. Тогда создать
-    // объект можно будет только через караметризированный конструктор
+    // 1.4.4 + 1.6.1
     public House(int numberOfFloors) {
+        if (numberOfFloors <= 0)
+            throw new IllegalArgumentException("Количество этажей должно быть больше нуля");
         this.numberOfFloors = numberOfFloors;
     }
 

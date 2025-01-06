@@ -15,14 +15,45 @@ import java.util.Arrays;
  */
 public class Student {
     String name;
-    int[] marks;
+    private final int[] marks;
 
-    public Student() {}
 
     // 1.4.7
     public Student(String name, int... marks ) {
+        for (int mark : marks) { // 1.6.8
+            if (mark < 2 || mark > 5)
+                throw new IllegalArgumentException("Это не оценка");
+        }
         this.name = name;
         this.marks = marks;
+    }
+
+    // Безопасно, так как поле marks неизменяемое
+    public int[] getMarks() {
+        return marks;
+    }
+
+    // 1.5.6
+    public double averageValue() {
+        if (marks.length == 0)
+            return 0;
+        double res = 0;
+        for (int mark : marks) {
+            res = res + mark;
+        }
+        return res / marks.length;
+    }
+
+    // 1.5.6
+    public boolean isExcellent() {
+        if (marks.length > 0) {
+            for (int mark : marks) {
+                if (mark != 5)
+                    return false;
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -1,10 +1,25 @@
 package hw.oop;
 
 public class Way {
-    City city;
-    int price;
+    private final City city;
+    private int price;
 
-    public Way() {}
+    public Way(City city, int price) {
+        this.city = city;
+        this.price = price;
+    }
+
+    public String getCity() {
+        return city.name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     @Override
     public String toString() {
