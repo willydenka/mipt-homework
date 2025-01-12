@@ -1,5 +1,7 @@
 package hw.oop;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /*
@@ -14,39 +16,38 @@ import java.util.Arrays;
 4.	Создать студента Андрея и скопировать ему оценки Васи так, чтобы изменение оценок Васи не влияло на Андрея.
  */
 public class Student {
-    String name;
-    private final int[] marks;
-
+     private final String name;
+     private final ArrayList<Integer> marks = new ArrayList<>();
 
     // 1.4.7
-    public Student(String name, int... marks ) {
+    public Student(String name, ArrayList<String> strings, int... marks) {
         for (int mark : marks) { // 1.6.8
             if (mark < 2 || mark > 5)
                 throw new IllegalArgumentException("Это не оценка");
+            this.marks.add(mark);
         }
         this.name = name;
-        this.marks = marks;
     }
 
-    // Безопасно, так как поле marks неизменяемое
-    public int[] getMarks() {
-        return marks;
+
+    public ArrayList<Integer> getMarks() {
+        return new ArrayList<>(marks);
     }
 
     // 1.5.6
     public double averageValue() {
-        if (marks.length == 0)
+        if (marks.isEmpty())
             return 0;
         double res = 0;
         for (int mark : marks) {
             res = res + mark;
         }
-        return res / marks.length;
+        return res / marks.size();
     }
 
     // 1.5.6
     public boolean isExcellent() {
-        if (marks.length > 0) {
+        if (!marks.isEmpty()) {
             for (int mark : marks) {
                 if (mark != 5)
                     return false;
@@ -58,8 +59,8 @@ public class Student {
 
     @Override
     public String toString() {
-        if (marks.length != 0)
-            return name + ": " + Arrays.toString(marks);
+        if (!marks.isEmpty())
+            return name + ": " + marks;
         return name + " без оценок";
     }
 }

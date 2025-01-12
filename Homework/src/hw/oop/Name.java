@@ -13,44 +13,50 @@ package hw.oop;
 •	Маяковский Владимир
  */
 public class Name {
-    String surname;
-    final String personalName;
-    String patronymic;
+    private final String surname;
+    private final String personalName;
+    private final String patronymic;
 
 
     // 1.4.5 + 1.6.2
     public Name(String personalName) {
-        if (personalName == null || personalName.isEmpty())
-            throw new IllegalArgumentException("Имя не должно быть пустым");
-        this.personalName = personalName;
+        this(personalName, "", "");
     }
 
     public Name(String personalName, String surname) {
-        this(personalName);
-        this.surname = surname;
+        this(personalName, surname, "");
     }
 
     public Name(String personalName, String surname, String patronymic) {
-        this(personalName, surname);
+        if (personalName == null) personalName = "";
+        if (surname == null) surname = "";
+        if (patronymic == null) patronymic = "";
+
+        if (personalName.isEmpty() && surname.isEmpty() && patronymic.isEmpty())
+            throw new IllegalArgumentException("Имя не должно быть пустым");
+        this.personalName = personalName;
+        this.surname = surname;
         this.patronymic = patronymic;
     }
 
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getPersonalName() {
+        return personalName;
+    }
+
+    public String getPatronymic() {
+        return patronymic;
+    }
 
     @Override
     public String toString() {
-        String result = "";
-        if (surname != null)
-            result += surname;
-        if (personalName != null) {
-            if (!result.isEmpty())
-                result += " ";
-            result += personalName;
-        }
-        if (patronymic != null) {
-            if (!result.isEmpty())
-                result += " ";
-            result += patronymic;
-        }
-    return result;
+        String result = surname + " " + personalName + " " + patronymic;
+        return result.trim();
     }
 }
+
+
+

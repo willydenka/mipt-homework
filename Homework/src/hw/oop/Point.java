@@ -10,7 +10,9 @@ public class Point {
     int x;
     int y;
 
-    public Point(){}
+    public Point(Point point) {
+        this(point.x, point.y);
+    }
 
     // 1.4.1
     public Point(int x, int y) {

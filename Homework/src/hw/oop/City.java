@@ -13,12 +13,11 @@ import java.util.ArrayList;
  */
 public class City {
     String name;
-    private final ArrayList<Way> ways;
+    private final ArrayList<Way> ways = new ArrayList<>();;
 
 
     public City(String name) {
         this.name = name;
-        this.ways = new ArrayList<>();
     }
 
     // 1.4.8 + 1.6.9
@@ -35,28 +34,28 @@ public class City {
 
     // 1.6.9
     private void setWaysFromArray(Way way) {
-        if (this.ways.isEmpty()) // Если путей у города нет, сразу закидываем
-            this.ways.add(way);
-        else {
-            for (Way w : this.ways) { // Проверяем, не ведет ли переданный путь к городу, к которому у нас уже есть путь
-                if (w.getCity().equals(way.getCity())) { // Если ведет, то
-                    w.setPrice(way.getPrice()); // Обновляем стоимость
-                    return; // Выходим из метода
-                }
+        for (Way w : this.ways) { // Проверяем, не ведет ли переданный путь к городу, к которому у нас уже есть путь
+            if (w.getCity().equals(way.getCity())) { // Если ведет, то
+                w.setPrice(way.getPrice()); // Обновляем стоимость
+                return; // Выходим из метода
             }
-            this.ways.add(way); // Если пути в такой город нет, то просто добавляем его
         }
+        this.ways.add(way); // Если пути в такой город нет, то просто добавляем его
     }
 
     public void deleteWay(Way way) {
         if (!this.ways.contains(way))
-            throw new IllegalArgumentException("Такой дороги нет");
+            return;
         this.ways.remove(way);
+    }
+
+    public ArrayList<Way> getWays() {
+        return new ArrayList<>(ways);
     }
 
     @Override
     public String toString() {
-        if (ways == null) return name;
+        if (ways.isEmpty()) return name;
         return "Город " + name + ", связанные города: " + ways;
     }
 }

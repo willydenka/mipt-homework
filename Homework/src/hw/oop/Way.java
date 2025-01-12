@@ -9,8 +9,8 @@ public class Way {
         this.price = price;
     }
 
-    public String getCity() {
-        return city.name;
+    public City getCity() {
+        return city;
     }
 
     public int getPrice() {

@@ -9,7 +9,8 @@ public class Gun {
             this.capacity = capacity;
             this.cartridges = cartridges;
         } else throw new IllegalArgumentException(
-                "Вместимость магазина не может быть меньше 0 патронов, а зарядить магазин нельзя количеством, превышающим вместимость");
+                "Вместимость магазина не может быть меньше 0 патронов," +
+                        "а зарядить магазин нельзя количеством, превышающим вместимость");
     }
 
     public boolean isCharged() {
@@ -30,20 +31,10 @@ public class Gun {
         if (this.cartridges == capacity)
             // Перезарядка не требуется
             return cartridges;
-
-        int tmp = cartridges;
-        // Если переданных патронов и оставшихся в магазине больше вместимости или столько же
-        if (tmp + this.cartridges >= capacity) {
-            while (this.cartridges != capacity) { // То до тех пор, пока магазин не заполнится до конца
-                tmp--;
-                this.cartridges++; // Заполняем магазин
-            }
-        } else // Если переданных патронов и оставшихся в магазине меньше вместимости
-            while (tmp != 0) { // То до тех пор, пока не кончатся переданные патроны
-                tmp--;
-                this.cartridges++; // Заполняем магазин
-        }
-        return tmp; // Возвращаем число ставшихся патронов
+        int temp = capacity - (this.cartridges + cartridges);
+        if (temp >= 0)
+            return 0;
+        return Math.abs(temp);
     }
 
     public int discharge() {

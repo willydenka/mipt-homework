@@ -20,8 +20,8 @@ public class Line {
 
     // 1.4.2 + 1.6.6 Две любые линии не могут ссылаться на один и тот же объект точки
     public Line(Point startPoint, Point endPoint) {
-        this.startPoint = new Point(startPoint.x, startPoint.y);
-        this.endPoint = new Point(endPoint.x, endPoint.y);
+        this.startPoint = new Point(startPoint); // Копирование объекта через копирующий конструктор
+        this.endPoint = new Point(endPoint);
     }
 
     public Line(int x1, int y1, int x2, int y2) {
@@ -29,19 +29,19 @@ public class Line {
     }
 
     public Point getStartPoint() {
-        return new Point(startPoint.x, startPoint.y);
+        return startPoint; // Возвращаем изменяемый объект специально, чтобы можно было изменять линию
     }
 
     public void setStartPoint(Point startPoint) {
-        this.startPoint = new Point(startPoint.x, startPoint.y);
+        this.startPoint = new Point(startPoint);
     }
 
     public Point getEndPoint() {
-        return new Point(endPoint.x, endPoint.y);
+        return endPoint; // Возвращаем изменяемый объект специально, чтобы можно было изменять линию
     }
 
     public void setEndPoint(Point endPoint) {
-        this.endPoint = new Point(endPoint.x, endPoint.y);
+        this.endPoint = new Point(endPoint);
     }
 
     // 1.5.3
@@ -56,3 +56,4 @@ public class Line {
         return "Линия от " + startPoint + " до " + endPoint;
     }
 }
+

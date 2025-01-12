@@ -1,6 +1,6 @@
 package hw.oop;
 
-public final class Fraction {
+public class Fraction {
     private final int numerator;
     private final int denominator;
 

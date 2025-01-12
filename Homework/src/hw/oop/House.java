@@ -17,6 +17,10 @@ public class House {
         this.numberOfFloors = numberOfFloors;
     }
 
+    public int getNumberOfFloors() {
+        return numberOfFloors;
+    }
+
     @Override
     public String toString() {
         String text;
