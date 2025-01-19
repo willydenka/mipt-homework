@@ -1,6 +1,6 @@
 package hw.oop;
 // 1.5.8
-public class Square {
+public class Square extends PolylineGet {
     Point upperLeftCorner;
     private int sideLength;
 
@@ -25,13 +25,13 @@ public class Square {
         return sideLength;
     }
 
+
     public Polyline getPolyline() {
-        Polyline polyline = new Polyline(upperLeftCorner);
+        Polyline polyline = new ClosedPolyline(upperLeftCorner);// 2.3.6
         polyline.addPoints(
                 new Point(upperLeftCorner.x + sideLength, upperLeftCorner.y), // правый верхний угол
                 new Point(upperLeftCorner.x + sideLength, upperLeftCorner.y - sideLength), // правый нижний угол
-                new Point(upperLeftCorner.x, upperLeftCorner.y - sideLength), // // левый нижний угол
-                new Point(upperLeftCorner.x, upperLeftCorner.y)); // левый верхний угол
+                new Point(upperLeftCorner.x, upperLeftCorner.y - sideLength)); // // левый нижний угол
         return polyline;
     }
     @Override

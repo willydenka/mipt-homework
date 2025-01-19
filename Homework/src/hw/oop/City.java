@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class City {
     String name;
-    private final ArrayList<Way> ways = new ArrayList<>();;
+    protected final ArrayList<Way> ways = new ArrayList<>();;
 
 
     public City(String name) {
@@ -33,7 +33,7 @@ public class City {
     }
 
     // 1.6.9
-    private void setWaysFromArray(Way way) {
+    protected void setWaysFromArray(Way way) {
         for (Way w : this.ways) { // Проверяем, не ведет ли переданный путь к городу, к которому у нас уже есть путь
             if (w.getCity().equals(way.getCity())) { // Если ведет, то
                 w.setPrice(way.getPrice()); // Обновляем стоимость

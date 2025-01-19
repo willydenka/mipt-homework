@@ -14,7 +14,7 @@ package hw.oop;
 чтобы положение третьей линии соответствовало требованиям пункта 3.
 5.	Измените координаты первой линии так, чтобы при этом не изменились, координаты третьей линии.
  */
-public class Line {
+public class Line extends SumLenLine {
     private Point startPoint;
     private Point endPoint;
 
@@ -44,8 +44,9 @@ public class Line {
         this.endPoint = new Point(endPoint);
     }
 
-    // 1.5.3
-    public double getLength() {
+
+    @Override
+    public double getLen() {
         double res;
         res = Math.sqrt(Math.pow(endPoint.x - startPoint.x, 2) + Math.pow(endPoint.y - startPoint.y, 2));
         return res;

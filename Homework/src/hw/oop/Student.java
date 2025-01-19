@@ -3,6 +3,8 @@ package hw.oop;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 
 /*
 Создайте сущность Студент, которая описывается:
@@ -18,14 +20,17 @@ import java.util.Arrays;
 public class Student {
      private final String name;
      private final ArrayList<Integer> marks = new ArrayList<>();
+     private Rule rule;
 
-    // 1.4.7
-    public Student(String name, ArrayList<String> strings, int... marks) {
-        for (int mark : marks) { // 1.6.8
-            if (mark < 2 || mark > 5)
-                throw new IllegalArgumentException("Это не оценка");
+
+    public Student(String name, Rule rule, int... marks) {
+        rule.check(marks);
+        this(name, marks);
+        this.rule = rule;
+    }
+    public Student(String name, int... marks) {
+        for (int mark : marks)
             this.marks.add(mark);
-        }
         this.name = name;
     }
 
@@ -62,5 +67,25 @@ public class Student {
         if (!marks.isEmpty())
             return name + ": " + marks;
         return name + " без оценок";
+    }
+}
+// 2.3.9
+interface Rule {
+    void check(int... marks);
+}
+
+class RuleRus implements Rule{
+    @Override
+    public void check(int... marks) {
+        for (int mark : marks)
+            if (mark < 2 || mark > 5) throw new IllegalArgumentException("Список оценок не соответствует правилу");
+    }
+}
+
+class RuleUSA implements Rule{
+    @Override
+    public void check(int... marks) {
+        for (int mark : marks)
+            if (mark < 1 || mark > 10) throw new IllegalArgumentException("Список оценок не соответствует правилу");
     }
 }

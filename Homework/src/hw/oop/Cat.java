@@ -1,14 +1,13 @@
 package hw.oop;
 // 1.5.2
-public class Cat {
-    private String name;
+public class Cat extends Meow {
 
     public Cat(String name) {
-        this.name = name;
+        super(name);
     }
-
+    @Override
     public void meow() {
-        System.out.println(name + ": мяу!");
+        System.out.println(getName() + ": мяу!");
     }
 
     public void meow(int n) {
@@ -17,13 +16,14 @@ public class Cat {
             for (int i = 0; i < n-1; i++) {
                 res += "-мяу";
             }
-            System.out.println(name + ": " + res);
+            System.out.println(getName() + ": " + res);
         }
         else throw new IllegalArgumentException("Кот не может мяукать меньше одного раза");
     }
 
     @Override
     public String toString() {
-        return "Кот: " + name;
+        return "Кот: " + getName();
     }
 }
+

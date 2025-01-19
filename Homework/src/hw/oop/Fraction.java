@@ -1,6 +1,6 @@
 package hw.oop;
 
-public class Fraction {
+public final class Fraction extends Number {
     private final int numerator;
     private final int denominator;
 
@@ -71,5 +71,25 @@ public class Fraction {
     // Служебный метод для исключений
     private IllegalArgumentException exception() {
         throw new IllegalArgumentException("Деление на ноль или некорректное значение");
+    }
+
+    @Override
+    public int intValue() {
+        return numerator/denominator;
+    }
+
+    @Override
+    public long longValue() {
+        return (long) numerator/denominator;
+    }
+
+    @Override
+    public float floatValue() {
+        return (float) numerator/denominator;
+    }
+
+    @Override
+    public double doubleValue() {
+        return (double) numerator/denominator;
     }
 }

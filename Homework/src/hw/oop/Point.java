@@ -6,7 +6,7 @@ package hw.oop;
 •	Может возвращать текстовое представление вида “{X;Y}”
 Необходимо создать три точки с разными координатами и вывести на экран их текстовое представление.
  */
-public class Point {
+public sealed class Point permits Point3d {
     int x;
     int y;
 

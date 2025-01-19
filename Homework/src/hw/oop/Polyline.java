@@ -15,9 +15,8 @@ import java.util.Arrays;
 но в качестве середины имеет точки: {2,-5}, {4,-8}
 3.	Сдвиньте начало первой Ломаной таким образом, чтобы одновременно сдвинулось начало второй Ломаной.
  */
-public class Polyline {
+public class Polyline extends SumLenLine {
     ArrayList<Point> points;
-
 
     // 1.4.3
     public Polyline(Point... points) {
@@ -30,8 +29,8 @@ public class Polyline {
         this.points.addAll(Arrays.asList(points));
     }
 
-    // 1.5.7
-    public double getLength() {
+    @Override
+    public double getLen() {
         double res = 0;
         for (int i = 0; i < points.size()-1; i++) {
             Point startPoint = points.get(i); // Берем первую точку
