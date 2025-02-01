@@ -1,5 +1,9 @@
 package ru.lashin.geometry;
 
+import ru.lashin.methods.Lengthable;
+
+import java.util.Objects;
+
 /*
 Создайте сущность Линия, расположенную на двумерной плоскости, которая описывается:
 •	Координата начала: Точка
@@ -14,7 +18,7 @@ package ru.lashin.geometry;
 чтобы положение третьей линии соответствовало требованиям пункта 3.
 5.	Измените координаты первой линии так, чтобы при этом не изменились, координаты третьей линии.
  */
-public class Line {
+public class Line implements Lengthable {
     private Point startPoint;
     private Point endPoint;
 
@@ -44,7 +48,7 @@ public class Line {
         this.endPoint = new Point(endPoint);
     }
 
-
+    @Override
     public double length() {
         double res;
         res = Math.sqrt(Math.pow(endPoint.x - startPoint.x, 2) + Math.pow(endPoint.y - startPoint.y, 2));
@@ -54,6 +58,20 @@ public class Line {
     @Override
     public String toString() {
         return "Линия от " + startPoint + " до " + endPoint;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Line line = (Line) o;
+        return  (startPoint.equals(line.startPoint) && endPoint.equals(line.endPoint)
+            || startPoint.equals(line.endPoint) && endPoint.equals(line.startPoint));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(startPoint, endPoint);
     }
 }
 

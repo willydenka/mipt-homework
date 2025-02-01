@@ -1,6 +1,7 @@
 package ru.lashin.basic;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /*
@@ -35,7 +36,7 @@ public class City {
     // 1.6.9
     protected void setWaysFromArray(Way way) {
         for (Way w : this.ways) { // Проверяем, не ведет ли переданный путь к городу, к которому у нас уже есть путь
-            if (w.getCity().equals(way.getCity())) { // Если ведет, то
+            if (w.getCity().name.equals(way.getCity().name)) { // Если ведет, то
                 w.setPrice(way.getPrice()); // Обновляем стоимость
                 return; // Выходим из метода
             }
@@ -58,7 +59,20 @@ public class City {
         if (ways.isEmpty()) return name;
         return "Город " + name + ", связанные города: " + ways;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof City city) || ways.size() != city.ways.size()) return false;
+        for (Way way : ways) {
+            if (!city.ways.contains(way)) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, ways);
+    }
 }
-
-
 

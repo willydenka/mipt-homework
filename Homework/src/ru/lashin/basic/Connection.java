@@ -1,4 +1,7 @@
-package ru.lashin.myExceptions;
+package ru.lashin.basic;
+
+import ru.lashin.myExceptions.ClosedResourceException;
+import ru.lashin.myExceptions.LossOfConnectionException;
 
 import java.util.Random;
 

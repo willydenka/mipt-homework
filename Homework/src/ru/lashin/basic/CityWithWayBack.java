@@ -18,7 +18,7 @@ public class CityWithWayBack extends City {
     @Override
     protected void setWaysFromArray(Way way) {
         for (Way w : super.ways) {
-            if (w.getCity().equals(way.getCity())) {
+            if (w.getCity().name.equals(way.getCity().name)) {
                 w.setPrice(way.getPrice());
                 return;
             }

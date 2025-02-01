@@ -1,4 +1,7 @@
 package ru.lashin.geometry;
+
+import java.util.Objects;
+
 /*
 Создайте сущность Точка, расположенную на двумерной плоскости, которая описывается:
 •	Координата Х: целое число
@@ -23,5 +26,18 @@ public sealed class Point permits Point3d {
     @Override
     public String toString() {
         return "{" + x + ";" + y + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point point = (Point) o;
+        return x == point.x && y == point.y;
+    }
+
+    @Override
+    public int hashCode() {
+       return Objects.hash(x, y);
     }
 }

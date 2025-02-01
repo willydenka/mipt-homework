@@ -4,6 +4,7 @@ import ru.lashin.methods.Lengthable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 /*
 Создайте сущность Ломаная, которая будет представлять собой ломаную линию.
@@ -48,6 +49,20 @@ public class Polyline implements Lengthable {
     @Override
     public String toString() {
         return "Линия " + points;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Polyline polyline)) return false;
+        for (Point point : points)
+            if (!polyline.points.contains(point)) return false;
+        return length() == polyline.length();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(points);
     }
 }
 

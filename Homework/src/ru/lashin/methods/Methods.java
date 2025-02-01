@@ -4,7 +4,7 @@ import ru.lashin.basic.Student;
 import ru.lashin.geometry.Point;
 import ru.lashin.geometry.Polyline;
 import ru.lashin.geometry.Shape;
-import ru.lashin.myExceptions.Connection;
+import ru.lashin.basic.Connection;
 import ru.lashin.myExceptions.LossOfConnectionException;
 import ru.lashin.myExceptions.MarkException;
 import java.util.*;
@@ -95,7 +95,6 @@ public class Methods {
 
     // 4.2.3
     public static String addMark(Student... students) {
-        String info = "Оценки не добавились никому";
         Random random = new Random();
         int mark = random.nextInt(10)+1;
         int count = 0;
@@ -106,12 +105,10 @@ public class Methods {
             } catch (MarkException e) {
                 for (int i = 0; i < count; i++)
                     students[i].deleteLastMark();
-                count = 0;
-                break;
+                throw new MarkException("Оценки не добавились никому");
             }
         }
-        if (count > 0) info = "Все оценки записаны";
-        return info;
+        return "Оценки записаны";
     }
 
     // 4.2.4

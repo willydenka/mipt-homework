@@ -2,6 +2,7 @@ package ru.lashin.basic;
 import ru.lashin.myExceptions.MarkException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Student {
      private final String name;
@@ -72,5 +73,28 @@ public class Student {
             return name + ": " + marks;
         return name + " без оценок";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        double averageOne, averageTwo;
+        int sum = 0;
+        for (int mark : marks)
+            sum+=mark;
+        averageOne = (double)sum/marks.size();
+        sum = 0;
+        for (int mark : student.marks)
+            sum+=mark;
+        averageTwo = (double)sum/student.marks.size();
+        return averageOne == averageTwo && name.equals(student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, marks, rule);
+    }
 }
+
 
