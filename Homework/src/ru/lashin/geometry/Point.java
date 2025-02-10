@@ -2,16 +2,9 @@ package ru.lashin.geometry;
 
 import java.util.Objects;
 
-/*
-Создайте сущность Точка, расположенную на двумерной плоскости, которая описывается:
-•	Координата Х: целое число
-•	Координата Y: целое число
-•	Может возвращать текстовое представление вида “{X;Y}”
-Необходимо создать три точки с разными координатами и вывести на экран их текстовое представление.
- */
 public sealed class Point permits Point3d {
-    int x;
-    int y;
+    public int x;
+    public int y;
 
     public Point(Point point) {
         this(point.x, point.y);
@@ -39,5 +32,14 @@ public sealed class Point permits Point3d {
     @Override
     public int hashCode() {
        return Objects.hash(x, y);
+    }
+
+    @Override
+    public Point clone() {
+        try {
+            return (Point) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

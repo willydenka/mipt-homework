@@ -107,4 +107,14 @@ public final class Fraction extends Number {
     public int hashCode() {
         return Objects.hash(numerator, denominator);
     }
+
+    @Override
+    public Fraction clone() {
+        try {
+            return (Fraction) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

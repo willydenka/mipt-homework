@@ -1,14 +1,12 @@
 package ru.lashin.methods;
-import ru.lashin.basic.Bird;
-import ru.lashin.basic.Student;
-import ru.lashin.geometry.Point;
-import ru.lashin.geometry.Polyline;
-import ru.lashin.geometry.Shape;
-import ru.lashin.basic.Connection;
+import ru.lashin.basic.*;
+import ru.lashin.geometry.*;
 import ru.lashin.myExceptions.LossOfConnectionException;
 import ru.lashin.myExceptions.MarkException;
 import java.util.*;
 import java.util.Random;
+import java.util.function.*;
+
 import static java.lang.Math.*;
 import static java.lang.Integer.parseInt;
 
@@ -127,5 +125,95 @@ public class Methods {
                 System.out.println("Студента " + exception.getMessage() + " создать невозмжно");
             }
         }
+    }
+
+    // 6.2.1
+    public static void moveLine(Line<Point> line) {
+        int x = line.getStartPoint().x;
+        if (x >= 0) x = x+10;
+        else x = x-10;
+        line.setStartPoint(new Point(x, line.getEndPoint().y));
+
+    }
+
+    // 6.2.2
+    public static double findMax(List<Box<? extends Number>> boxes) {
+        double max = (double) boxes.getFirst().getValue();
+        for (int i = 1; i < boxes.size(); i++) {
+            double current = (double)boxes.get(i).getValue();
+            if (current > max)
+                max = current;
+        }
+        return max;
+    }
+
+    // 6.2.3
+    public static void startCountdown(Box<? super Point3d> box) {
+        box.setValue(new Point3d(1,2,3));
+    }
+
+    // 6.2.4
+    public static void fillList(List<? super Integer> list) {
+        for (int i = 0; i < 100; i++) {
+            list.add(i);
+        }
+    }
+
+    // 6.3.1
+    /*
+    Разработайте такой метод, который будет принимать список значений типа T,
+    и объект имеющий единственный метод apply. Данный метод надо применить к каждому элементу списка,
+    и вернуть новый список значений типа P, при этом типы T и P могут совпадать, а могут не совпадать.
+     */
+    public static <T, P> ArrayList<P> transformList(List<T> list, Function<T, P> function) {
+        ArrayList<P> result = new ArrayList<>();
+        for (T t : list) result.add(function.apply(t));
+        return result;
+    }
+
+    // 6.3.2
+    /*
+    Разработайте такой метод, который будет принимать список значений типа T и
+    объект имеющий единственный метод test (принимает T и возвращает boolean).
+    Верните новый список типа T, из которого удалены все значения не прошедшие проверку условием.
+     */
+    public static <T> ArrayList<T> filter(List<T> list, Predicate<T> predicate) {
+        ArrayList<T> result = new ArrayList<>();
+        for (T t : list)
+            if (predicate.test(t)) result.add(t);
+        return result;
+    }
+
+    // 6.3.3
+    /*
+    Разработайте такой метод, который будет принимать список значений типа T
+    и способ с помощью которого список значений можно свести к
+    одному значению типа T, которое и возвращается из метода.
+     */
+    public static <T> T reduction(List<T> list, BinaryOperator<T> binaryOperator, T defaultValue) {
+        if (list.isEmpty()) return defaultValue;
+        T result = list.getFirst();
+        for (int i = 1; i < list.size(); i++) {
+            result = binaryOperator.apply(result, list.get(i));
+        }
+        return result;
+    }
+
+    // 6.3.4
+    /*
+    Разработайте такой метод, который будет возвращать коллекцию типа P со значениями типа T.
+    Данный метод будет принимать:
+    1.	Список исходных значений
+    2.	Способ создания результирующей коллекции
+    3.	Способ передачи значений исходного списка в результирующую коллекцию.
+     */
+    public static <T, P extends Collection<T>> Collection<P> collection(P list, Supplier<P> supplier, Predicate<T> predicate) {
+        // TODO
+		/*
+		Не смог разобраться, как логику реализации трех пунктов возможно поместить в этот метод. Можно, конечно, в теле лямбды все решить,
+		но мне кажется, что не это требуется в задаче.
+		*/
+	
+        return null;
     }
 }

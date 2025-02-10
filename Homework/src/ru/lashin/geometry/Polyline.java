@@ -55,9 +55,24 @@ public class Polyline implements Lengthable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Polyline polyline)) return false;
-        for (Point point : points)
-            if (!polyline.points.contains(point)) return false;
-        return length() == polyline.length();
+        ArrayList<Point> thisPoints = this.getPoints();
+        ArrayList<Point> objectPoints = polyline.getPoints();
+        if (getClass() == ClosedPolyline.class) thisPoints.add(thisPoints.getFirst());
+        if (polyline.getClass() == ClosedPolyline.class) objectPoints.add(objectPoints.getFirst());
+        ArrayList<Line> thisLines = pointsToLine(thisPoints);
+        ArrayList<Line> objectLines = pointsToLine(objectPoints);
+        if (thisLines.size() != objectLines.size()) return false;
+        for (Line line : thisLines)
+            if (!objectLines.contains(line)) return false;
+        return true;
+    }
+
+    private ArrayList<Line> pointsToLine(ArrayList<Point> points) {
+        ArrayList<Line> lines = new ArrayList<>();
+        for (int i = 0; i < points.size(); i++) {
+            lines.add(new Line(points.get(i), points.get(i+1)));
+        }
+        return lines;
     }
 
     @Override
@@ -65,4 +80,3 @@ public class Polyline implements Lengthable {
         return Objects.hashCode(points);
     }
 }
-
