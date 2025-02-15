@@ -1,4 +1,5 @@
 package ru.lashin.basic;
+import ru.lashin.generics.Comparable;
 import ru.lashin.myExceptions.MarkException;
 
 import java.util.ArrayList;
@@ -95,10 +96,8 @@ public class Student implements Comparable<Student> {
     }
 
     @Override
-    public int compare(Student other) {
-        if (averageMark() > other.averageMark()) return 1;
-        if (averageMark() < other.averageMark()) return -1;
-        return 0;
+    public int compareTo(Student other) {
+        return Double.compare(averageMark(), other.averageMark());
     }
 }
 

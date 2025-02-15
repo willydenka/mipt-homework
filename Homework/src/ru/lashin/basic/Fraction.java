@@ -1,14 +1,39 @@
 package ru.lashin.basic;
 
+import java.util.ArrayList;
 import java.util.Objects;
-
+/**
+ * Если необходимо представить дробь как отрицательное значение, то знак минус
+ * указывается в числителе. Отрицательное значение в знаменателе приведет к исключению.
+ */
 public final class Fraction extends Number {
     private final int numerator;
     private final int denominator;
 
-    public Fraction(int numerator, int denominator) {
-        if (denominator <= 0)
-            throw exception();
+    public static class Builder {
+        private static final Builder builder = new Builder();
+        private static final ArrayList<Fraction> cache = new ArrayList<>();
+        private int numerator;
+        private int denominator;
+
+        private Builder() {}
+
+        public static Builder values(int numerator, int denominator) {
+            if (denominator<=0) exception();
+            builder.numerator = numerator;
+            builder.denominator = denominator;
+            return builder;
+        }
+        public Fraction build() {
+            Fraction fraction = new Fraction(builder.numerator, builder.denominator);
+            int idx = cache.indexOf(fraction);
+            if (idx != -1) return cache.get(idx);
+            cache.add(fraction);
+            return fraction;
+        }
+    }
+
+    private Fraction(int numerator, int denominator) {
         this.numerator = numerator;
         this.denominator = denominator;
     }
@@ -71,7 +96,7 @@ public final class Fraction extends Number {
     }
 
     // Служебный метод для исключений
-    private IllegalArgumentException exception() {
+    private static IllegalArgumentException exception() {
         throw new IllegalArgumentException("Деление на ноль или некорректное значение");
     }
 
@@ -116,5 +141,4 @@ public final class Fraction extends Number {
             throw new RuntimeException(e);
         }
     }
-
 }

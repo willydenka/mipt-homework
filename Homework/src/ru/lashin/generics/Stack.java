@@ -1,4 +1,4 @@
-package ru.lashin.basic;
+package ru.lashin.generics;
 
 import java.util.ArrayList;
 
@@ -10,16 +10,12 @@ public class Stack<T> {
     }
 
     public T pop() {
-        if (list.isEmpty()) emptyStack();
+        T t = peek();
         return list.removeLast();
     }
 
     public T peek() {
-        if (list.isEmpty()) emptyStack();
+        if (list.isEmpty()) throw new IllegalArgumentException("Стек пуст");
         return list.getLast();
-    }
-
-    private void emptyStack() {
-        throw new IllegalArgumentException("Стек пуст");
     }
 }

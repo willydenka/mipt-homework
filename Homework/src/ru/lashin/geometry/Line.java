@@ -4,25 +4,25 @@ import ru.lashin.methods.Lengthable;
 
 
 public class Line<T extends Point> implements Lengthable {
-    private T startPoint;
-    private T endPoint;
+    private Point startPoint;
+    private Point endPoint;
 
 
-    public Line(T startPoint, T endPoint) {
-        this.startPoint = startPoint;
-        this.endPoint = endPoint;
+    private Line(Point startPoint, Point endPoint) {
+        this.startPoint = startPoint.clone();
+        this.endPoint = endPoint.clone();
     }
 
-//    public Line(int x1, int y1, int x2, int y2) {
-//        this(new Point(x1, y2), new Point(x2, y2));
-//    }
+    public static<T extends Point> Line<T> of(T startPoint, T endPoint) { // статическая фабрика
+        return new Line<>(startPoint, endPoint);
+    }
 
     public Point getStartPoint() {
         return startPoint;
     }
 
     public void setStartPoint(T startPoint) {
-        this.startPoint = startPoint;
+        this.startPoint = startPoint.clone();
     }
 
     public Point getEndPoint() {
@@ -30,14 +30,12 @@ public class Line<T extends Point> implements Lengthable {
     }
 
     public void setEndPoint(T endPoint) {
-        this.endPoint = endPoint;
+        this.endPoint = endPoint.clone();
     }
 
     @Override
     public double length() {
-        double res;
-        res = Math.sqrt(Math.pow(endPoint.x - startPoint.x, 2) + Math.pow(endPoint.y - startPoint.y, 2));
-        return res;
+        return startPoint.distanceTo(endPoint);
     }
 
     @Override

@@ -2,7 +2,7 @@ package ru.lashin.geometry;
 
 import java.util.Objects;
 
-public sealed class Point permits Point3d {
+public sealed class Point implements Cloneable permits Point3d {
     public int x;
     public int y;
 
@@ -10,10 +10,13 @@ public sealed class Point permits Point3d {
         this(point.x, point.y);
     }
 
-    // 1.4.1
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    public double distanceTo(Point end) {
+        return Math.sqrt(Math.pow(end.x - this.x, 2) + Math.pow(end.y - this.y, 2));
     }
 
     @Override

@@ -1,5 +1,7 @@
 package ru.lashin.methods;
 import ru.lashin.basic.*;
+import ru.lashin.generics.Box;
+import ru.lashin.generics.Storage;
 import ru.lashin.geometry.*;
 import ru.lashin.myExceptions.LossOfConnectionException;
 import ru.lashin.myExceptions.MarkException;
@@ -128,12 +130,10 @@ public class Methods {
     }
 
     // 6.2.1
-    public static void moveLine(Line<Point> line) {
+    public static void moveLine(Line<? extends Point> line) {
         int x = line.getStartPoint().x;
-        if (x >= 0) x = x+10;
-        else x = x-10;
-        line.setStartPoint(new Point(x, line.getEndPoint().y));
-
+        x = x>=0 ? x+10 : x-10;
+        line.getStartPoint().x = x;
     }
 
     // 6.2.2
@@ -165,7 +165,7 @@ public class Methods {
     и объект имеющий единственный метод apply. Данный метод надо применить к каждому элементу списка,
     и вернуть новый список значений типа P, при этом типы T и P могут совпадать, а могут не совпадать.
      */
-    public static <T, P> ArrayList<P> transformList(List<T> list, Function<T, P> function) {
+    public static <T, P> ArrayList<P> map(List<T> list, Function<T, P> function) {
         ArrayList<P> result = new ArrayList<>();
         for (T t : list) result.add(function.apply(t));
         return result;
@@ -190,13 +190,11 @@ public class Methods {
     и способ с помощью которого список значений можно свести к
     одному значению типа T, которое и возвращается из метода.
      */
-    public static <T> T reduction(List<T> list, BinaryOperator<T> binaryOperator, T defaultValue) {
-        if (list.isEmpty()) return defaultValue;
+    public static <T> Storage<T> reduce(List<T> list, BinaryOperator<T> binaryOperator) {
         T result = list.getFirst();
-        for (int i = 1; i < list.size(); i++) {
-            result = binaryOperator.apply(result, list.get(i));
-        }
-        return result;
+        for (T t : list)
+            result = binaryOperator.apply(result, t);
+        return new Storage<>(result);
     }
 
     // 6.3.4
@@ -207,13 +205,13 @@ public class Methods {
     2.	Способ создания результирующей коллекции
     3.	Способ передачи значений исходного списка в результирующую коллекцию.
      */
-    public static <T, P extends Collection<T>> Collection<P> collection(P list, Supplier<P> supplier, Predicate<T> predicate) {
-        // TODO
-		/*
-		Не смог разобраться, как логику реализации трех пунктов возможно поместить в этот метод. Можно, конечно, в теле лямбды все решить,
-		но мне кажется, что не это требуется в задаче.
-		*/
-	
-        return null;
+    public static <R, T extends List<R>, P extends List<T>> P collect(
+            List<R> list,
+            Supplier<P> supplier,
+            BiConsumer<R, P> consumer) {
+        P result = supplier.get();
+        for (R r : list)
+            consumer.accept(r, result);
+        return result;
     }
 }

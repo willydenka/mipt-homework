@@ -1,4 +1,4 @@
-package ru.lashin.basic;
+package ru.lashin.generics;
 
 public class Box<T> {
     T t;
