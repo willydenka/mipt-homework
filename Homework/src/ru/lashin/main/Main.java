@@ -12,7 +12,7 @@ public class Main {
     public static void main(String[] args) {
 
         // 3.1.3
-        Methods.calculate(7, Fraction.Builder.values(12,13).build(),
+        Methods.calculate(7, Fraction.Builder.getBuilder().build(12, 13),
                 new BigInteger("123456789123456789"));
 
 

@@ -13,19 +13,16 @@ public final class Fraction extends Number {
     public static class Builder {
         private static final Builder builder = new Builder();
         private static final ArrayList<Fraction> cache = new ArrayList<>();
-        private int numerator;
-        private int denominator;
 
         private Builder() {}
 
-        public static Builder values(int numerator, int denominator) {
-            if (denominator<=0) exception();
-            builder.numerator = numerator;
-            builder.denominator = denominator;
+        public static Builder getBuilder() {
             return builder;
         }
-        public Fraction build() {
-            Fraction fraction = new Fraction(builder.numerator, builder.denominator);
+
+        public Fraction build(int numerator, int denominator) {
+            if (denominator<=0) exception();
+            Fraction fraction = new Fraction(numerator, denominator);
             int idx = cache.indexOf(fraction);
             if (idx != -1) return cache.get(idx);
             cache.add(fraction);
@@ -39,54 +36,54 @@ public final class Fraction extends Number {
     }
 
     public Fraction sum(int num) {
-        return new Fraction(denominator * num + numerator, denominator);
+        return Fraction.Builder.getBuilder().build(denominator * num + numerator, denominator);
     }
     public Fraction sum(Fraction anotherFraction) {
         if (denominator == anotherFraction.denominator)
-            return new Fraction(numerator + anotherFraction.numerator, denominator);
+            return Fraction.Builder.getBuilder().build(numerator + anotherFraction.numerator, denominator);
         else {
             int firstNum, secondNum;
             int denom;
             denom = denominator * anotherFraction.denominator;
             firstNum = denom / denominator * numerator;
             secondNum = denom / anotherFraction.denominator * anotherFraction.numerator;
-            return new Fraction(firstNum + secondNum, denom);
+            return Fraction.Builder.getBuilder().build(firstNum + secondNum, denom);
         }
     }
 
     public Fraction minus(int num) {
-        return new Fraction(numerator - denominator * num, denominator);
+        return Fraction.Builder.getBuilder().build(numerator - denominator * num, denominator);
     }
     public Fraction minus(Fraction anotherFraction) {
         if (denominator == anotherFraction.denominator)
-            return new Fraction(numerator - anotherFraction.numerator, denominator);
+            return Fraction.Builder.getBuilder().build(numerator - anotherFraction.numerator, denominator);
         else {
             int firstNum, secondNum;
             int denom;
             denom = denominator * anotherFraction.denominator;
             firstNum = denom / denominator * numerator;
             secondNum = denom / anotherFraction.denominator * anotherFraction.numerator;
-            return new Fraction(firstNum - secondNum, denom);
+            return Fraction.Builder.getBuilder().build(firstNum - secondNum, denom);
         }
     }
 
     public Fraction multiply(int num) {
-        return new Fraction(numerator * num, denominator);
+        return Fraction.Builder.getBuilder().build(numerator * num, denominator);
     }
     public Fraction multiply(Fraction anotherFraction) {
-        return new Fraction(numerator * anotherFraction.numerator,
+        return Fraction.Builder.getBuilder().build(numerator * anotherFraction.numerator,
                 denominator * anotherFraction.denominator);
     }
 
     public Fraction divide(int num) {
         if (num == 0)
             throw exception();
-        return new Fraction(numerator, denominator * num);
+        return Fraction.Builder.getBuilder().build(numerator, denominator * num);
     }
     public Fraction divide(Fraction anotherFraction) {
         if (anotherFraction.numerator == 0)
             throw exception();
-        return new Fraction(numerator * anotherFraction.denominator,
+        return Fraction.Builder.getBuilder().build(numerator * anotherFraction.denominator,
                 denominator * anotherFraction.numerator);
     }
 
