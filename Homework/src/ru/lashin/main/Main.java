@@ -1,11 +1,15 @@
 package ru.lashin.main;
 import ru.lashin.basic.Fraction;
+import ru.lashin.generics.LazyStorage;
+import ru.lashin.generics.Storage;
 import ru.lashin.geometry.Point;
 import ru.lashin.methods.Methods;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.*;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 
 public class Main {
@@ -113,6 +117,13 @@ public class Main {
             resultArr.add(current);
         });
         System.out.println(arr3);
-        // start 6.3.4
+        // end 6.3.4
+
+        // Ленивое хранилище
+        Supplier<LazyStorage<Integer>> supplier = ()->Methods.sum(1,2,3);
+        LazyStorage<Integer> result2 = LazyStorage.of(supplier);
+        System.out.println("----------------");
+        System.out.println(result2.getValue(0));
+
     }
 }

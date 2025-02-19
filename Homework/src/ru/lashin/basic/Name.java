@@ -16,9 +16,43 @@ public class Name {
     private final String surname;
     private final String personalName;
     private final String patronymic;
+    // Решение задачи на 20.02.25
+    public static class Builder {
+        private String surname;
+        private String personalName;
+        private String patronymic;
 
+        public Builder(){}
 
-    // 1.4.5 + 1.6.2
+        public Builder surname(String surname) {
+           this.surname = surname;
+           return this;
+        }
+
+        public Builder personalName(String personalName) {
+            this.personalName = personalName;
+            return this;
+        }
+
+        public Builder patronymic(String patronymic) {
+            this.patronymic = patronymic;
+            return this;
+        }
+
+        public Name build() {
+            if (this.personalName == null) this.personalName = "";
+            if (this.surname == null) this.surname = "";
+            if (this.patronymic == null) this.patronymic = "";
+            return new Name(this);
+        }
+    }
+
+    private Name(Builder builder) {
+        surname = builder.surname;
+        personalName = builder.personalName;
+        patronymic = builder.patronymic;
+    }
+
     public Name(String personalName) {
         this(personalName, "", "");
     }

@@ -1,6 +1,7 @@
 package ru.lashin.methods;
 import ru.lashin.basic.*;
 import ru.lashin.generics.Box;
+import ru.lashin.generics.LazyStorage;
 import ru.lashin.generics.Storage;
 import ru.lashin.geometry.*;
 import ru.lashin.myExceptions.LossOfConnectionException;
@@ -194,7 +195,7 @@ public class Methods {
         T result = list.getFirst();
         for (T t : list)
             result = binaryOperator.apply(result, t);
-        return new Storage<>(result);
+        return  Storage.of(result);
     }
 
     // 6.3.4
@@ -213,5 +214,16 @@ public class Methods {
         for (R r : list)
             consumer.accept(r, result);
         return result;
+    }
+
+    // Задача про Storage
+    public static LazyStorage<Integer> sum(int... nums) {
+        if (nums == null) return LazyStorage.empty();
+        int sum = 0;
+        for (int num: nums) {
+            sum+=num;
+            System.out.println("counting");
+        }
+        return LazyStorage.of(sum);
     }
 }
