@@ -6,7 +6,7 @@ import java.util.Objects;
  * Если необходимо представить дробь как отрицательное значение, то знак минус
  * указывается в числителе. Отрицательное значение в знаменателе приведет к исключению.
  */
-public final class Fraction extends Number {
+public final class Fraction extends Number implements Fractionable {
     private final int numerator;
     private final int denominator;
 
@@ -36,6 +36,7 @@ public final class Fraction extends Number {
     }
 
     public Fraction sum(int num) {
+        System.out.println("getting sum");
         return Fraction.Builder.getBuilder().build(denominator * num + numerator, denominator);
     }
     public Fraction sum(Fraction anotherFraction) {
@@ -99,6 +100,7 @@ public final class Fraction extends Number {
 
     @Override
     public int intValue() {
+        System.out.println("getting value");
         return numerator/denominator;
     }
 
