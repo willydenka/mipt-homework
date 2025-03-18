@@ -1,16 +1,18 @@
-package ru.lashin.patterns;
-
-import java.util.*;
-
-interface State {
-    void next(TrafficLight trafficLight);
-    void make();
-    void on(TrafficLight trafficLight);
-    void off(TrafficLight trafficLight);
-}
+package ru.lashin.patterns.state;
 
 public class TrafficLight {
     State state;
+    public TrafficLight(State state) {
+        this.state = state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public State getState() {
+        return state;
+    }
 
     public void make() {
         state.make();

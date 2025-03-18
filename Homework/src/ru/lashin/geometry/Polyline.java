@@ -2,6 +2,7 @@ package ru.lashin.geometry;
 
 import ru.lashin.methods.Lengthable;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -9,10 +10,12 @@ import java.util.Objects;
 public class Polyline implements Lengthable {
     ArrayList<Point> points;
 
+
     public Polyline(Point... points) {
         this.points = new ArrayList<>();
         this.points.addAll(Arrays.asList(points));
     }
+
 
     public ArrayList<Point> getPoints() {
         return new ArrayList<>(points);
@@ -20,6 +23,9 @@ public class Polyline implements Lengthable {
 
     public void addPoints(Point... points) {
         this.points.addAll(Arrays.asList(points));
+    }
+    public void addPoints(ArrayList<Point> points) {
+        this.points.addAll(points);
     }
 
     @Override
