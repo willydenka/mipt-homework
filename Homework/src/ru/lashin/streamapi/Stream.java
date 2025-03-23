@@ -1,13 +1,9 @@
-package ru.lashin.patterns.streamapi;
-
-import ru.lashin.generics.Storage;
+package ru.lashin.streamapi;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.*;
-import java.util.stream.Collectors;
 
 public class Stream<T> {
     interface Action<V,P> {
