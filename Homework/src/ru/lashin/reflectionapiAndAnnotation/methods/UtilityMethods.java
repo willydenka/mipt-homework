@@ -19,7 +19,6 @@ public class UtilityMethods {
                 if (m.getParameterCount() == 0
                         && m.getReturnType() != void.class
                         && m.isAnnotationPresent(Invoke.class)) {
-                    m.setAccessible(true);
                     Object value = m.invoke(instance);
                     result.put(m.getName(), value);
                 }
