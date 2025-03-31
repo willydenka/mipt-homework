@@ -1,5 +1,7 @@
 package ru.lashin.reflectionapiAndAnnotation.cache;
 
+import lombok.SneakyThrows;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -47,7 +49,8 @@ public class Cacher {
         }
 
         @Override
-        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        @SneakyThrows
+        public Object invoke(Object proxy, Method method, Object[] args) {
             method.setAccessible(true);
             // Если в списке методов нет текущего метода, то он не кэшируется
             if (!nameMethods.contains(method.getName())) return method.invoke(originalObject, args);

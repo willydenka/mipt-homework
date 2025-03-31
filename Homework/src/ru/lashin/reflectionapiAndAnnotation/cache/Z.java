@@ -3,7 +3,7 @@ package ru.lashin.reflectionapiAndAnnotation.cache;
 import java.util.Objects;
 
 @Cache({"cacheTest"})
-class Z implements Bukva {
+public class Z implements Bukva {
     String stringField;
 
     public Z(String stringField) {

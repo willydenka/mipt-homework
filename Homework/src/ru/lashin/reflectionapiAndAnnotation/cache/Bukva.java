@@ -1,5 +1,5 @@
 package ru.lashin.reflectionapiAndAnnotation.cache;
 
-interface Bukva {
+public interface Bukva {
     int cacheTest();
 }

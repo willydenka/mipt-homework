@@ -4,19 +4,19 @@ public class AutomaticRifle extends Gun {
 
     private final int rateOfFire;
 
-    public AutomaticRifle() { // Без параметров. Скорострельность 30, вместимость 30.
-        this(30, 0, 30);
-    }
-
-    public AutomaticRifle(int ammoMax) { // С указанием максимального числа патронов. Скорострельность будет равна половине обоймы
-        if (ammoMax <= 0) ammoMax = 10; // Дефолтное значение
-        this(0, ammoMax, ammoMax/2);
-    }
-
-    public AutomaticRifle(int ammoMax, int rateOfFire) { // С указанием максимального количества патронов в обойме и скорострельности
-        if (ammoMax <= 0) ammoMax = 10; // Дефолтное значение
-        this(0, ammoMax, rateOfFire);
-    }
+//    public AutomaticRifle() { // Без параметров. Скорострельность 30, вместимость 30.
+//        this(30, 0, 30);
+//    }
+//
+//    public AutomaticRifle(int ammoMax) { // С указанием максимального числа патронов. Скорострельность будет равна половине обоймы
+//        if (ammoMax <= 0) ammoMax = 10; // Дефолтное значение
+//        this(0, ammoMax, ammoMax/2);
+//    }
+//
+//    public AutomaticRifle(int ammoMax, int rateOfFire) { // С указанием максимального количества патронов в обойме и скорострельности
+//        if (ammoMax <= 0) ammoMax = 10; // Дефолтное значение
+//        this(0, ammoMax, rateOfFire);
+//    }
 
     public AutomaticRifle(int capacity, int ammo, int rateOfFire) {
         super(capacity, ammo);
