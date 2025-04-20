@@ -4,20 +4,22 @@ import ru.lashin.myExceptions.MarkException;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class Student implements Comparable<Student> {
      private final String name;
      private final ArrayList<Integer> marks = new ArrayList<>();
-     private final Rule rule;
+     private final Predicate<Integer> rule;
 
 
-    public Student(String name, Rule rule, int... marks) {
-        for (int mark : marks) {
-            if (rule != null && !rule.check(mark)) exception();
-            this.marks.add(mark);
-        }
+    public Student(String name, Predicate<Integer> rule, int... marks) {
         this.name = name;
         this.rule = rule;
+        if (marks == null) return;
+        for (int mark : marks) {
+            if (rule != null && !rule.test(mark)) exception();
+            this.marks.add(mark);
+        }
     }
 
     public Student(String name, int... marks) {
@@ -25,7 +27,7 @@ public class Student implements Comparable<Student> {
     }
 
     public void addMark(int mark) {
-        if (rule != null && !rule.check(mark)) exception();
+        if (rule != null && !rule.test(mark)) exception();
         marks.add(mark);
     }
 

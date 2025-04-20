@@ -1,0 +1,7 @@
+2025-04-18 18:47:24.762839+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Синтаксическая ошибка в выражении SQL "select * from [*]?"; ожидалось "identifier"
+Syntax error in SQL statement "select * from [*]?"; expected "identifier"; SQL statement:
+select * from ? [42001-232]
+2025-04-18 18:51:02.996921+03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Нет данных
+No data is available [2000-232]
