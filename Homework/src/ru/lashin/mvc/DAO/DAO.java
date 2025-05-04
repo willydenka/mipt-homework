@@ -1,15 +1,16 @@
-package ru.lashin.db;
+package ru.lashin.mvc.DAO;
 
-import lombok.SneakyThrows;
+import org.springframework.stereotype.Component;
+import ru.lashin.db.Column;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Component
 public class DAO {
     Set<String> namesTables = Set.of("Department", "Employee");
 

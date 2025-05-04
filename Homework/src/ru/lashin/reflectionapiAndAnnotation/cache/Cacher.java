@@ -50,7 +50,7 @@ public class Cacher {
 
         @Override
         @SneakyThrows
-        public Object invoke(Object proxy, Method method, Object[] args) {
+        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             method.setAccessible(true);
             // Если в списке методов нет текущего метода, то он не кэшируется
             if (!nameMethods.contains(method.getName())) return method.invoke(originalObject, args);

@@ -8,7 +8,7 @@ class Tester {
         context.setBean(B.class, null);
         context.setBean(Object.class, new Object());
         B b = new B();
-        Reset.reset(context, b);
+        ResetAnnotationProcessor.reset(context, b);
         System.out.println(b);
     }
 }

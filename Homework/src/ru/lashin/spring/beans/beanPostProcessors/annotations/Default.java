@@ -1,6 +1,4 @@
-package ru.lashin.reflectionapiAndAnnotation.entity;
-
-import ru.lashin.reflectionapiAndAnnotation.Value;
+package ru.lashin.spring.beans.beanPostProcessors.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -9,7 +7,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD})
-public @interface ToString {
-    Value value() default Value.YES;
+public @interface Default {
+    String value();
 }
-

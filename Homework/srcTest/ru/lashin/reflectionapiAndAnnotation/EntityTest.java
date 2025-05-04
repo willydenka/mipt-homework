@@ -4,10 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.lashin.reflectionapiAndAnnotation.entity.Entity;
 import ru.lashin.reflectionapiAndAnnotation.entity.ToString;
-import ru.lashin.reflectionapiAndAnnotation.methods.Value;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class EntityTest {
     @ToString
