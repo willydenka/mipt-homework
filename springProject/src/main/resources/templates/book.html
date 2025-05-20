@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование книги</title>
+</head>
+<body>
+<h1>
+    Книга: <span th:text="${book.title + ', ' + book.yearOfProduction + ' год, автор: ' + book.authorName}"></span>
+</h1>
+<div th:if="${book.bookHolder != null}">
+    <p>Книга у держателя: <span th:text="${book.bookHolder.surname + ' ' + book.bookHolder.name
+     + ' ' + book.bookHolder.patronymic + ', ' + book.bookHolder.birthdate}"></span></p>
+    <form th:action="@{/library/books/{id}(id=${book.id})}" method="post">
+        <button type="submit">Открепить книгу</button>
+    </form>
+</div>
+
+
+<div th:unless="${book.bookHolder != null}">
+    <form th:action="@{/library/books/assign}" method="post">
+        <label for="bookHolder">Выберите держателя:</label>
+        <select id="bookHolder" name="bookHolderId">
+            <option th:each="bookHolder : ${bookHolders}" th:value="${bookHolder.id}"
+                    th:text="${bookHolder.surname + ' '
+                    + bookHolder.name + ' ' + bookHolder.patronymic + ', ' + bookHolder.birthdate}">
+            </option>
+        </select>
+        <input type="hidden" name="bookId" th:value="${book.id}">
+        <button type="submit">Выдать книгу</button>
+    </form>
+</div>
+<br>
+<div>
+    <form th:action="@{/library/books}" method="get">
+        <button type="submit">К списку книг</button>
+    </form>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div>
+    <form th:action="@{/library/removeBook/{id}(id=${book.id})}" method="post">
+        <button type="submit">Удалить книгу из базы</button>
+    </form>
+</div>
+</body>
+</html>

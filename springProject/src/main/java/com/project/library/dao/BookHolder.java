@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "handlers")
-public class BookHandler {
+@Table(name = "holders")
+public class BookHolder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,12 +20,12 @@ public class BookHandler {
     private String patronymic;
     @Column(name = "birthdate")
     private LocalDate birthdate;
-    @OneToMany(mappedBy = "bookHandler", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bookHolder", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();
 
-    public BookHandler() {}
+    public BookHolder() {}
 
-    public BookHandler(String name, String surname, String patronymic, LocalDate birthdate) {
+    public BookHolder(String name, String surname, String patronymic, LocalDate birthdate) {
         this.name = name;
         this.surname = surname;
         this.patronymic = patronymic;
@@ -75,11 +75,17 @@ public class BookHandler {
 
     public void addBook(Book book) {
         books.add(book);
+        book.setBookHolder(this);
+    }
+
+    public void removeBook(Book book) {
+        books.remove(book);
+        book.setBookHolder(null);
     }
 
     @Override
     public String toString() {
-        return "BookHandler{" +
+        return "BookHolder{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +

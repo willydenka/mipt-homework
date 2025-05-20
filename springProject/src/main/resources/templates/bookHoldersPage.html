@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book handlers</title>
+</head>
+<body>
+<div>
+    <li th:each="bookHolder : ${bookHolders}">
+        <a th:href="@{/library/bookHolders/{id}(id=${bookHolder.id})}"
+           th:text="${bookHolder.surname + ' '
+           + bookHolder.name + ' ' + bookHolder.patronymic + ' ' + bookHolder.birthdate}"></a>
+    </li>
+</div>
+<br>
+<div>
+    <form th:action="@{/library}" method="get">
+        <button type="submit">На главную</button>
+    </form>
+</div>
+
+</body>
+</html>

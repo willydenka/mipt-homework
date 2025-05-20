@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование держателя книги</title>
+</head>
+<body>
+<h1>
+  Держатель: <span th:text="${bookHolder.surname + ', '
+   + bookHolder.name + ' ' + bookHolder.patronymic + ', ' + bookHolder.birthdate}"></span>
+</h1>
+
+<div th:if="${bookHolder.books.isEmpty()}">
+  У держателя еще нет закрепленных книг.
+</div>
+<div th:if="${!bookHolder.books.isEmpty()}">
+  <h3>Список закрепленных книг:</h3>
+  <ul>
+    <li th:each="book : ${bookHolder.books}">
+      <a th:href="@{/library/books/{id}(id=${book.id})}"
+         th:text="${book.title + ', ' + book.yearOfProduction + ' год, автор: ' + book.authorName}"></a>
+    </li>
+  </ul>
+</div>
+<br>
+<div>
+  <form th:action="@{/library/bookHolders}" method="get">
+    <button type="submit">К списку держателей</button>
+  </form>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div>
+  <form th:action="@{/library/removeHolder/{id}(id=${bookHolder.id})}" method="post">
+    <button type="submit">Удалить держателя из базы</button>
+  </form>
+</div>
+</body>
+</html>

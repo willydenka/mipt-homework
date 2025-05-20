@@ -1,6 +1,6 @@
 package com.project.library.dao;
 import jakarta.persistence.*;
-import java.time.LocalDate;
+
 /*
 * dao (data access object) - применяется для проекции сущности в базе данных.
  */
@@ -15,14 +15,14 @@ public class Book {
     @Column(name = "authorName", length = 50)
     private String authorName;
     @Column(name = "year_of_production")
-    private LocalDate yearOfProduction;
+    private int yearOfProduction;
     @ManyToOne
-    @JoinColumn(name = "handler_id")
-    private BookHandler bookHandler;
+    @JoinColumn(name = "holder_id")
+    private BookHolder bookHolder;
 
     public Book() {}
 
-    public Book(String title, String authorName, LocalDate yearOfProduction) {
+    public Book(String title, String authorName, int yearOfProduction) {
         this.title = title;
         this.authorName = authorName;
         this.yearOfProduction = yearOfProduction;
@@ -40,7 +40,7 @@ public class Book {
         return authorName;
     }
 
-    public LocalDate getYearOfProduction() {
+    public int getYearOfProduction() {
         return yearOfProduction;
     }
 
@@ -53,16 +53,16 @@ public class Book {
         this.authorName = authorName;
     }
 
-    public void setYearOfProduction(LocalDate yearOfProduction) {
+    public void setYearOfProduction(int yearOfProduction) {
         this.yearOfProduction = yearOfProduction;
     }
 
-    public BookHandler getBookHandler() {
-        return bookHandler;
+    public BookHolder getBookHolder() {
+        return bookHolder;
     }
 
-    public void setBookHandler(BookHandler bookHandler) {
-        this.bookHandler = bookHandler;
+    public void setBookHolder(BookHolder bookHolder) {
+        this.bookHolder = bookHolder;
     }
 
     @Override
